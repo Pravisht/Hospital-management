@@ -1,17 +1,17 @@
-package com.example.test.entity;
+package com.example.Hospital.entity;
 
-import com.example.test.entity.type.Bloodgroup;
+import com.example.Hospital.entity.type.Bloodgroup;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.IdGeneratorType;
-import org.hibernate.annotations.processing.Pattern;
-import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
 
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"name", "email"})
@@ -29,5 +29,8 @@ public class Patient {
     private String email;
 
     private Bloodgroup bloodgroup;
+
+    @OneToMany(mappedBy = "patient")
+    private List<Appointment> appointmentList;
 
 }

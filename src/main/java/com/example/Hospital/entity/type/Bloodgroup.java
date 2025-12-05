@@ -1,4 +1,4 @@
-package com.example.test.entity.type;
+package com.example.Hospital.entity.type;
 
 public enum Bloodgroup {
     A_POS,

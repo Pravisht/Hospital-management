@@ -1,19 +1,15 @@
-package com.example.test;
+package com.example.Hospital;
 
-import com.example.test.controller.HospitalController;
-import com.example.test.dto.PatientDTO;
-import com.example.test.entity.Patient;
-import com.example.test.repository.Patientrepo;
+import com.example.Hospital.dto.PatientDto;
+import com.example.Hospital.entity.Patient;
+import com.example.Hospital.repository.Patientrepo;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestComponent;
 
 import java.util.List;
 
-import static com.example.test.entity.type.Bloodgroup.A_POS;
+import static com.example.Hospital.entity.type.Bloodgroup.A_POS;
 
 @SpringBootTest
 public class PatientTest {
@@ -37,6 +33,6 @@ public class PatientTest {
 
     @Test
     public void patientGetAll() {
-        List<PatientDTO>=
+        List<PatientDto>=
     }
 }

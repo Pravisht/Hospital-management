@@ -1,19 +1,19 @@
-package com.example.test.dto;
+package com.example.Hospital.dto;
 
-import com.example.test.entity.type.Bloodgroup;
+import com.example.Hospital.entity.type.Bloodgroup;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-@Component
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class PatientDTO {
-//    private Long id;
+public class PatientDto {
+    private Long id;
     private String name;
     private String email;
     private String city;

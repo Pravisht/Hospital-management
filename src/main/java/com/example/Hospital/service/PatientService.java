@@ -3,6 +3,7 @@ package com.example.Hospital.service;
 import com.example.Hospital.dto.PatientDto;
 import com.example.Hospital.entity.Patient;
 import com.example.Hospital.repository.Patientrepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ public class PatientService {
     @Autowired
     private Patientrepo patientrepo;
 
+    @Transactional
     public List<PatientDto> getAllPatient(){
         List <Patient> patientList= patientrepo.findAll();
          return patientList.stream().map(
@@ -23,6 +25,7 @@ public class PatientService {
 
     }
 
+    @Transactional
     public PatientDto createPatient(PatientDto patientDTO){
         Patient patient = new Patient();
         patient.setId(patientDTO.getId());
@@ -39,6 +42,7 @@ public class PatientService {
         }
     }
 
+    @Transactional
     public PatientDto getPatientById(Long id){
         Patient patient = patientrepo.findById(id).orElse(null);
         if(patient!=null) {
@@ -50,6 +54,7 @@ public class PatientService {
         }
     }
 
+    @Transactional
     public Boolean deletePatientById(Long id){
         Patient patient = patientrepo.findById(id).orElse(null);
         if(patient!=null) {
@@ -60,6 +65,8 @@ public class PatientService {
             return false;
         }
     }
+
+    @Transactional
     public PatientDto updatePatientById(Long id, PatientDto patientDTO){
         Patient patient = patientrepo.findById(id).orElse(null);
         if(patientDTO.getId()!=null){

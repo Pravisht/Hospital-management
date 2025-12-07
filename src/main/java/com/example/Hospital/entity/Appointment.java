@@ -1,5 +1,6 @@
 package com.example.Hospital.entity;
 
+import com.example.Hospital.dto.AppointmentDto;
 import com.example.Hospital.entity.type.Shift;
 import jakarta.persistence.*;
 import lombok.*;

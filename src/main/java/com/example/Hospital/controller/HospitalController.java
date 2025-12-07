@@ -4,6 +4,7 @@ import com.example.Hospital.dto.AppointmentDto;
 import com.example.Hospital.dto.PatientDto;
 import com.example.Hospital.service.AppointmentService;
 import com.example.Hospital.service.PatientService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,14 @@ public class HospitalController {
     @GetMapping("/getAllPatient")
     public List<PatientDto> getAllPatient(){
         return patientService.getAllPatient();
+    }
+
+    @GetMapping("/getAllAppointments")
+    public ResponseEntity<?> getAllAppointments(){
+        List<AppointmentDto> appointmentList= appointmentService.getAllAppointments();
+
+        return (appointmentList!=null)?ResponseEntity.status(HttpStatus.OK).body(appointmentList)
+                :ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No data found to display");
     }
 
     @PostMapping("/createAppointment")
@@ -52,7 +61,7 @@ public class HospitalController {
     @GetMapping("/getPatientById/{id}")
     public ResponseEntity<?>  getPatientById(@PathVariable Long id){
         PatientDto patientDto1 = patientService.getPatientById(id);
-        if(patientDto1 !=null){
+        if(patientDto1 ==null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(patientDto1);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(patientDto1);
@@ -63,9 +72,17 @@ public class HospitalController {
         if(!isDeleted){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable to Delete Patient");
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body("Deleted Patient successfully");
+        return ResponseEntity.status(HttpStatus.OK).body("Deleted Patient successfully");
     }
 
+    @DeleteMapping("/deleteAppointment/{id}")
+    public ResponseEntity<?> deleteAppointment(@RequestBody Long id){
+        Boolean isDeleted = appointmentService.deleteAppointmentById(id);
+        if(!isDeleted){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable to delete Appoitment");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body("Deleted Appointment successfully");
+    }
     @PatchMapping("/updatePatient/{id}")
     public ResponseEntity<?> updatePatient(@PathVariable Long id, @RequestBody PatientDto patientDTO){
         PatientDto patientDto1 = patientService.updatePatientById(id,patientDTO);
